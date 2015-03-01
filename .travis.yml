@@ -1,3 +1,0 @@
-language: julia
-install: bash install/dependencies.sh
-script: make
