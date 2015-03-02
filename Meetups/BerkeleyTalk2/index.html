@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Convex.jl</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			<!-- Hi everyone. My name is Karanveer. This is David. Today we'll be presenting to you Convex.jl, a convex
+			optimization modeling framework in Julia. Our goal has been to show the beauty of convex optimization and make optimization
+			accessible to everyone, no matter the background, by providing super clean interfaces. -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h1>Convex.jl</h1>
+					<h3>Optimization for Everyone</h3>
+					<br />
+					<br />
+					<p>
+						<small>David Zeng · Karanveer Mohan</small>
+					</p>
+				</section>
+
+				<!-- What exactly is Convex.jl? We'd like to think of ourselves
+				primarily as an interface. On one end, you formulate your optimization
+				problems on paper. On the other end, low level solvers, usually written in C,
+				expect problems in very strict form. We reconcile these two ends.
+				You formulate your problem with syntax very similar to math, and we take care of
+				translating it to a form that the solver can recognize. Our focus is primarily
+				on convex optimization problems, which we will talk about next. -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>What is Convex.jl</h2>
+					<ul>
+						<li>Interface between math and solvers</li>
+						<li>Focus on convex optimization</li>
+					</ul>
+				</section>
+
+				<!--  So what's so cool about convex optimization problems? You can solve them
+				really quickly. You can solve them in polynomial time and get back global minima. This is kind of
+				reliable. Convex optimization problems cover a huge variety of problems we often see.
+				Even when a problem is not convex, hope is not lost. You use convex problems as sub-routines. Or, you can
+				relax the problem and solve them. For example, recently KV was trying to assign students to discussion groups in a class
+				he TA'd for. It wasn't a convex problem, but the convex relaxation was insanely good. -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Convex Optimization</h2>
+					<ul>
+						<li>Fast (provable polynomial complexity)</li>
+						<li>Global solution</li>
+						<li>Sub-routines and relaxations</li>
+					</ul>
+				</section>
+
+				<!-- And of course, there are tons of applications. Support vector machines use convex optimization. If you go into
+				finance or computer imaging or vision, it's applicable. It's useful for robot motion planning. And of course,
+				since were here today, convex optimization can be applied to quantum physics as well.
+				Even somethin you woudlnt expect: I was searching online
+				recently, and found that you can use convex optimization to find a convex hull for your cooking ingredients -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Applications</h2>
+					<ul>
+						<li>Machine learning</li>
+						<li>Finance</li>
+						<li>Signal and image processing</li>
+						<li>Computer vision</li>
+						<li>Robot motion planning</li>
+						<li>Quantum science</li>
+						<li>Cooking?!</li>
+					</ul>
+				</section>
+
+				<!-- We'll first go over some definitions, which many of you may already be familiar with.
+				Here's the rigorous definition of a convex function -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Convex Functions</h2>
+					<p>
+		      $f$ is <b>convex</b> if the domain of $f$ is a convex set, and
+		      for all $\theta \in [0,1]$
+		      <br />
+		      $$
+		      f(\theta x + (1-\theta)y ) \leq \theta f(x) + (1-\theta) f(y)
+		     	$$
+					</p>
+				</section>
+
+				<!-- But theres lots of equivalent ways to look at this -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<p class="left">Equivalently:</p>
+					<p>
+		      <ul>
+		      	<li>$f$ has nonnegative (upward) curvature</li>
+		      	<li>The graph of $f$ never lies above its chords</li>
+		      	<!-- Hessian is positive semidefinite -->
+		      	<li>$f'' \geq 0$ (if $f$ is differentiable)</li>
+		      </ul>
+		      </p>
+					<img class="convex" src="lib/images/convex.png" />
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h3>Other Definitions</h3>
+					<ul>
+						<li>$f$ is <b>concave</b> if and only if $-f$ is convex</li>
+						<li>$f$ is <b>affine</b> if and only if $f$ is both convex and concave</li>
+					</ul>
+				</section>
+
+				<!-- This is the traditional form of a convex optimization problem. We have some objective
+				f_0(x). f_0 is a function that will return a scalar value. For example minimize ||Ax-b||
+				subject to x_1 == 0, ||x|| <= 1 -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Traditional Form</h2>
+					<p>$$
+		      \begin{array}{ll}
+		      \mbox{minimize}  & f_0(x) \\
+		      \mbox{subject to} & f_i(x) \leq 0, \quad i=1, \ldots, m_1\\
+      		& h_i(x) = 0, \quad i=1, \ldots, m_2\\
+		      \end{array}
+		      $$</p>
+		      <br />
+					<div class="left-force">
+						<ul>
+						<li>Variable $x\in \mathbf{R}^n$</li>
+						<li>$f_i$ are all convex</li>
+						<li>$h_i$ are all affine</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- In the backend, solvers usually take the problem in the conic formulation of a convex opt problem
+
+				 -->
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Conic Form</h2>
+					<p>$$
+					\begin{array}{ll}
+      		\mbox{minimize}  & c^T x \\
+      		\mbox{subject to} & Ax + s= b\\
+      		& s \in \mathcal K\\
+      		\end{array}
+      		$$</p>
+      		<div class="left-force">where $\mathcal K$ is a <b>convex cone</b></div>
+      		<br /><br />
+      		$$ s \in \mathcal K \iff rs \in \mathcal K, \quad \forall r>0$$
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h3>Some Convex Cones</h3>
+					<p>
+					<ul>
+						<li>Positive orthant: $$\mathcal K_+ = \{x: x\geq 0\}$$</li>
+						<li>Second order cone: $$\mathcal K_{\mathrm{SOC}} = \{(x,t): \|x\|_2 \leq t\}$$</li>
+						<li>Semidefinite cone: $$\mathcal K_{\mathrm{SDP}} = \{X: X = X^T,~ v^T X v \geq 0,~ \forall v \in \mathbf{R}^n\}$$</li>
+					</ul>
+					</p>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h1>Demo</h1>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Affine Functions</h2>
+					<ul>
+						<li>+, -, /, *</li>
+						<li>Indexing: x[1:3, 2]</li>
+						<li>k-th diagonal: diag(x, k)</li>
+						<li>Transpose: x'</li>
+						<li>Dot product: x' * y</li>
+						<li>Reshape: vec(x) or reshape(x, 2, 3)</li>
+						<li>Stacking: [x y] or [x, y]</li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Elementwise Functions</h2>
+					<ul>
+						<li>Min, max: min(x, y) or max(x, y)</li>
+						<li>Minimum, maximum: minimum(x) or maximum(x)</li>
+						<li>Positive: pos(x)</li>
+						<li>Negative: neg(x)</li>
+						<li>Inverse positive: inv_pos(x)</li>
+						<li>Square, square root: x^2 or sqrt(x)</li>
+						<li>Absolute value: abs(x)</li>
+						<li>Geometric mean: geo_mean(x, y)</li>
+						<li>Exponent, log: exp(x) or log(x)</li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Vector or Matrix Functions</h2>
+					<ul>
+						<li>Norm: norm(x, 1), norm(x, 2), norm(x, :Inf)</li>
+						<li>Quadratic form: quad_form(x, P)</li>
+						<li>Quadratic over linear: quad_over_lin(x, y)</li>
+						<li>Norm_2 squared: sum_squares(x)</li>
+						<li>Inverse positive: inv_pos(x)</li>
+						<li>Square root: sqrt(x)</li>
+						<li>Square: x^2</li>
+						<li>Absolute: abs(x)</li>
+						<li>Geometric mean: geo_mean(x, y)</li>
+						<li>Max/min eigenvalue: lambda_max(X), lambda_min(X)</li>
+						<li>Singular values: nuclear_norm(X), operator_norm(X)</li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Nonconvex optimization</h2>
+					<ul>
+						<li>Mixed integer programs supported</li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+				<h2>Why Convex.jl?</h2>
+					<ul>
+						<!-- optimization gives us a declarative language for solving problems: we say what we care about and the system finds the best solution. it allows a separation of concerns: the problem formulation, and the algorithm to solve it, need not talk to each other so long as the algorithm can solve that kind of problem. -->
+						<li>Separation of concerns</li>
+						<li>40+ functions supported</li>
+						<li>MathProgBase interface to solvers</li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+				<h2>What's next?</h2>
+					<ul>
+						<li>Other forms of convex optimization problems</li>
+						<li>More functions (tell us what you want!)</li>
+						<li>More backend solvers</li>
+						<li>We value your feedback!</li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Links</h2>
+					<ul>
+						<li><a id="links1" href="http://convexjl.readthedocs.org/en/latest/">Convex.jl</a></li>
+						<li><a id="links2" href="http://www.cvxpy.org/en/latest/">cvxpy</a></li>
+						<li><a id="links3" href="http://dcp.stanford.edu/">dcp.stanford.edu</a></li>
+						<li><a id="links4" href="https://github.com/cvxgrp/scs">scs</a></li>
+						<li><a id="links5" href="https://github.com/ifa-ethz/ecos">ecos</a></li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+					<h2>Collaborators</h2>
+					<ul>
+						<li>Convex.jl: Madeleine Udell, Jenny Hong</li>
+						<li>cvx: Michael Grant, Stephen Boyd</li>
+						<li>cvxpy: Steven Diamond, Eric Chu, Stephen Boyd</li>
+						<li>scs: Brendan O’Donoghue, Eric Chu, Neal Parikh, Stephen Boyd</li>
+						<li>ecos: Alexander Domahidi, Eric Chu, Stephen Boyd</li>
+						<li>The JuliaOpt team + Tony Kelman</li>
+					</ul>
+				</section>
+
+				<section data-transition="linear" data-background="#d66661" data-background-transition="slide">
+				<h2>Thanks!</h2>
+				<a id="links6" href="mailto:dzeng0@stanford.edu">dzeng0@stanford.edu</a> · <a id="links7" href="mailto:kvmohan@stanford.edu">kvmohan@stanford.edu</a>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+				math: {
+		        mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+		        config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+		    },
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+			window.onkeypress = function(event) {
+				if (event.keyIdentifier == "Enter") {
+					Reveal.navigateNext();
+					event.preventDefault();
+				}
+
+				if (event.keyCode == 48) {
+					Reveal.navigatePrev();
+					event.preventDefault();
+				}
+				console.log(event);
+			};
+
+
+		</script>
+
+	</body>
+</html>
