@@ -1,3 +1,5 @@
+Note: This folder duplicates for record the original [interactive repo](https://github.com/staffjoy/jump-examples) and [slides](https://docs.google.com/presentation/d/1opWpSlkQvTcJbXfgzWbxlymA9fBgkqpEO_cxUFKHvJw/edit ) used in the Julia users meetup at Berkeley on Feb 21, 2015. The PDF and PPT versions of the slides can be found [here](./PredictiveAnalytics.pdf) and [here](./PredictiveAnalytics.pptx). 
+
 # JuMP Examples [![Build Status](https://travis-ci.org/StaffJoy/jump-examples.svg?branch=master)](https://travis-ci.org/StaffJoy/jump-examples)
 
 Optimization examples in [Julia](http://julialang.org/) using the [JuMP package](http://juliaopt.org) from the [StaffJoy](https://www.staffjoy.com) team.
