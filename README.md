@@ -1,6 +1,20 @@
+# README
+
 This repo stores some public resources from JuliaQuantum including Meetup slides, educational demos and so on.
 
-By default, the [MIT license](http://opensource.org/licenses/MIT) is assumed to the source codes in the repo.
+Except otherwise noticed in particular directories, the [MIT license](http://opensource.org/licenses/MIT) is assumed to the source codes in the repo.
+
+## Instruction
+
+To clone this repository, you need to install [Git](http://git-scm.com/), and run the following command line in terminal
+```
+git clone https://github.com/JuliaQuantum/Resources
+```
+on your local directory where you want to clone the *Resources* repository to.
+
+You can also download the whole repository in a ZIP ball through the [Dlownload ZIP](https://github.com/JuliaQuantum/Resources/archive/master.zip) button on [GitHub](https://github.com/JuliaQuantum/Resources).
+
+To contribute to this project, you may want to [fork](https://help.github.com/articles/fork-a-repo/) this repo and submit a [pull request](https://help.github.com/articles/using-pull-requests/) through Git.
 
 
 ## Collections
