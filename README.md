@@ -38,3 +38,13 @@ To contribute to this project, you may want to [fork](https://help.github.com/ar
     Video on [Youtube](http://youtu.be/S3tLgDU74XA?list=PLqrCZndvI0BiQNZ-MFn0MDYXJckKmFupk) (also on [this channel](http://v.youku.com/v_show/id_XOTAzMDAyMzgw.html)).
 
     Slides are under the `Meetups/2015Berkeley/BerkeleyTalk3` directory.
+
+### Julia Users Meetup@USTC, Hefei, China on Dec 25, 2015
+
+* ***Talk 1: New Opportunities with JuliaQuantum - Personal Perspective on Quantum Information*** by *Xiaodong Qi*:
+
+    Video is coming...
+
+    Slides are in the `Meetups/2015USTC/QiTalk/` directory.
+
+* ***Talk 2 is coming...***
