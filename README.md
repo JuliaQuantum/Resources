@@ -16,8 +16,15 @@ You can also download the whole repository in a ZIP ball through the [Dlownload 
 
 To contribute to this project, you may want to [fork](https://help.github.com/articles/fork-a-repo/) this repo and submit a [pull request](https://help.github.com/articles/using-pull-requests/) through Git.
 
+## Documents
 
-## Collections
+### GSoC proposals
+
+* ***GSoC2015 project on QuDynamics.jl for quantum dynamics solvers*** by *Amit Jamadagni*:
+
+    Proposal docs can be found in the `GSoC/2015/` directory.
+
+## Meetups
 
 ### SQuInT 2015 Breakout Session -- Julia Users Meetup@Berkeley on Feb 21, 2015
 
