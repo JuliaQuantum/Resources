@@ -52,6 +52,10 @@ To contribute to this project, you may want to [fork](https://help.github.com/ar
 
     Video is coming...
 
-    Slides are in the `Meetups/2015USTC/QiTalk/` directory.
+    Slides are in the `Meetups/2015USTC/USTCTalk1/` directory.
 
-* ***Talk 2 is coming...***
+* ***Talk 2: QuDynamics : Julia package for solving Dynamical Equations in Quantum Mechanics*** by *Amit Jamadagni*:
+
+    Video is coming...
+
+    Slides are in the `Meetups/2015USTC/USTCTalk2/` directory.
