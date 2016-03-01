@@ -16,8 +16,15 @@ You can also download the whole repository in a ZIP ball through the [Dlownload 
 
 To contribute to this project, you may want to [fork](https://help.github.com/articles/fork-a-repo/) this repo and submit a [pull request](https://help.github.com/articles/using-pull-requests/) through Git.
 
+## Documents
 
-## Collections
+### GSoC proposals
+
+* ***GSoC2015 project on QuDynamics.jl for quantum dynamics solvers*** by *Amit Jamadagni*:
+
+    Proposal docs can be found in the `GSoC/2015/` directory.
+
+## Meetups
 
 ### SQuInT 2015 Breakout Session -- Julia Users Meetup@Berkeley on Feb 21, 2015
 
@@ -25,16 +32,30 @@ To contribute to this project, you may want to [fork](https://help.github.com/ar
 
     Video on [Youtube](http://youtu.be/MANoOghiCbQ?list=PLqrCZndvI0BiQNZ-MFn0MDYXJckKmFupk) (also available over [this channel](http://v.youku.com/v_show/id_XOTAyODgwMzUy.html)).
 
-    Slides and interactive codes are under the `Meetups/BerkeleyTalk1/` directory.
+    Slides and interactive codes are under the `Meetups/2015Berkeley/BerkeleyTalk1/` directory.
 
 * ***Talk 2: Convex.jl: Optimization for Everyone*** by [*David Deng* and *Karanveer Mohan*](https://github.com/JuliaOpt/Convex.jl):
 
     Video on [Youtube](http://youtu.be/Xi7L4JYyjOA?list=PLqrCZndvI0BiQNZ-MFn0MDYXJckKmFupk) (also on [this channel](http://v.youku.com/v_show/id_XOTAzMDAyNDg0.html)).
 
-    Slides and interactive codes are under the `Meetups/BerkeleyTalk2/` directory.
+    Slides and interactive codes are under the `Meetups/2015Berkeley/BerkeleyTalk2/` directory.
 
 * ***Talk 3: Quantum Statistical Simulations with Julia*** by [*Katharine Hyatt*](http://web.physics.ucsb.edu/~kshyatt/):
 
     Video on [Youtube](http://youtu.be/S3tLgDU74XA?list=PLqrCZndvI0BiQNZ-MFn0MDYXJckKmFupk) (also on [this channel](http://v.youku.com/v_show/id_XOTAzMDAyMzgw.html)).
 
-    Slides are under the `Meetups/BerkeleyTalk3` directory.
+    Slides are under the `Meetups/2015Berkeley/BerkeleyTalk3` directory.
+
+### Julia Users Meetup@USTC, Hefei, China on Dec 25, 2015
+
+* ***Talk 1: New Opportunities with JuliaQuantum - Personal Perspective on Quantum Information*** by *Xiaodong Qi*:
+
+    Video is coming...
+
+    Slides are in the `Meetups/2015USTC/USTCTalk1/` directory.
+
+* ***Talk 2: QuDynamics : Julia package for solving Dynamical Equations in Quantum Mechanics*** by *Amit Jamadagni*:
+
+    Video is coming...
+
+    Slides are in the `Meetups/2015USTC/USTCTalk2/` directory.
